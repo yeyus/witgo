@@ -3,9 +3,13 @@ WIP. Go client for wit.ai
 
 ## Info
 
-- [Docs](https://godoc.org/github.com/kurrik/witgo)
+- [v1 Docs](https://godoc.org/github.com/kurrik/witgo/v1/witgo)
 
 ## Usage
+
+Import the versioned path:
+
+    import "github.com/kurrik/witgo/v1/witgo"
 
 Should be close to the
 [Node wit.ai client library](https://github.com/wit-ai/node-wit).
