@@ -51,7 +51,7 @@ Obtain your `Server Access Token` from your wit.ai project settings:
 
 Run the weather example:
 
-    ./examples/weather/run.sh -token=SERVER_ACCESS_TOKEN
+    ./examples/weather/run.sh -token=$SERVER_ACCESS_TOKEN
 
 This example mimics the functionality covered in the
 [wit.ai quick start tutorial](https://wit.ai/docs/quickstart).  You can view
@@ -59,4 +59,4 @@ the source of the example [here](/examples/weather/main.go).
 
 For debug output including raw HTTP logs:
 
-    ./examples/weather/run.sh -debug -token=SERVER_ACCESS_TOKEN
+    ./examples/weather/run.sh -debug -token=$SERVER_ACCESS_TOKEN
