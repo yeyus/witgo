@@ -51,7 +51,14 @@ Obtain your `Server Access Token` from your wit.ai project settings:
 
 Run the weather example:
 
-    ./examples/weather/run.sh -token=$SERVER_ACCESS_TOKEN
+    $ ./scripts/run.sh 01-weather -token=$SERVER_ACCESS_TOKEN
+    Running example 'examples/01-weather' with args '-token=...'
+    Interactive mode (use ':quit' to stop)
+    interactive> What is the weather?
+    < Where, exactly?
+    interactive> In Paris?
+    < I see it’s sunny in Paris today!
+    interactive> :quit
 
 This example mimics the functionality covered in the
 [wit.ai quick start tutorial](https://wit.ai/docs/quickstart).  You can view
@@ -59,4 +66,4 @@ the source of the example [here](/examples/weather/main.go).
 
 For debug output including raw HTTP logs:
 
-    ./examples/weather/run.sh -debug -token=$SERVER_ACCESS_TOKEN
+    ./scripts/run.sh 01-weather -debug -token=$SERVER_ACCESS_TOKEN
