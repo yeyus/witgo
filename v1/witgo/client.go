@@ -18,6 +18,7 @@ import (
 	"bufio"
 	"bytes"
 	"compress/gzip"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -25,6 +26,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 )
 
@@ -94,13 +96,44 @@ type Client struct {
 	UserAgent         string
 }
 
+// Creates a new wit.ai client with the supplied token.
+// Supports the use of HTTP proxies through the $HTTP_PROXY env var.
+// For example:
+//     export HTTP_PROXY=http://localhost:8080
+//
+// When using a proxy, disable TLS certificate verification with the following:
+//     export TLS_INSECURE=1
 func NewClient(accessToken string) *Client {
+	var (
+		req, _    = http.NewRequest("GET", "https://api.wit.ai", nil)
+		proxy, _  = http.ProxyFromEnvironment(req)
+		transport *http.Transport
+		tlsconfig *tls.Config
+	)
+	if proxy != nil {
+		tlsconfig = &tls.Config{
+			InsecureSkipVerify: getEnvEitherCase("TLS_INSECURE") != "",
+		}
+		if tlsconfig.InsecureSkipVerify {
+			fmt.Printf("WARNING: SSL cert verification disabled\n")
+		}
+		transport = &http.Transport{
+			Proxy:              http.ProxyURL(proxy),
+			TLSClientConfig:    tlsconfig,
+			DisableCompression: true,
+			DisableKeepAlives: true,
+		}
+	} else {
+		transport = &http.Transport{}
+	}
 	return &Client{
 		ServerAccessToken: accessToken,
-		HttpClient:        &http.Client{},
 		Version:           "20160412",
 		Base:              "https://api.wit.ai",
 		UserAgent:         "github.com/kurrik/witgo",
+		HttpClient: &http.Client{
+			Transport: transport,
+		},
 	}
 }
 
@@ -229,7 +262,7 @@ func NewResponseError(code int, body string) ResponseError {
 }
 
 func (e ResponseError) Error() string {
-	return fmt.Sprintf("Unable to handle response with code %d): `%v`", e.Code, e.Body)
+	return fmt.Sprintf("Unable to handle response with code %d: `%v`", e.Code, e.Body)
 }
 
 type Response http.Response
@@ -284,6 +317,13 @@ func (r Response) Parse(out interface{}) (err error) {
 		err = NewResponseError(r.StatusCode, string(b))
 	}
 	return
+}
+
+func getEnvEitherCase(k string) string {
+	if v := os.Getenv(strings.ToUpper(k)); v != "" {
+		return v
+	}
+	return os.Getenv(strings.ToLower(k))
 }
 
 func encodeJson(data interface{}) (buf *bytes.Buffer, err error) {

@@ -93,7 +93,11 @@ func (w *Witgo) Process(input Input) (err error) {
 			return
 		}
 		sessions[record.SessionID] = session
-		requests <- record.SessionID
+		// Non-blocking push onto channel.
+		select {
+		case requests <- record.SessionID:
+		default:
+		}
 	}
 	return
 }

@@ -11,6 +11,10 @@ mkdir -p $LIBPATH
 rm -rf $LIBPATH/v1
 ln -s $GITROOT/v1 $LIBPATH/v1
 
+echo "Getting dependencies"
+go get github.com/kurrik/oauth1a
+go get github.com/kurrik/twittergo
+
 shift
 NAME=`ls -d $GITROOT/examples/* | grep $PATTERN | head -n1`
 echo "Running example '$NAME' with args '$@'"
