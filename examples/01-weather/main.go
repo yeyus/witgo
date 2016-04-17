@@ -15,9 +15,9 @@
 package main
 
 import (
-	"../../v1/witgo"
 	"flag"
 	"fmt"
+	"github.com/kurrik/witgo/v1/witgo"
 	"os"
 )
 
