@@ -12,12 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Run with
-//     ./scripts/run.sh 02 -credentials=path/to/credentials
-//
-// The twittergo library supports debugging via proxy.  For example:
-//     TLS_INSECURE=1 HTTP_PROXY=http://localhost:8080 ./scripts/run.sh 02 -credentials=$HOME/countbotula.credentials
-
 package main
 
 import (

@@ -43,27 +43,16 @@ Then create a new `Witgo` object and call process on it:
     err = wg.Process(input)
 
 
-## Running examples
+## Environment flags
 
-Obtain your `Server Access Token` from your wit.ai project settings:
+| Flag | Description |
+| ---- | ----------- |
+| HTTP_PROXY | Passes API requests through a proxy, useful for debugging.  Ex: `HTTP_PROXY=http://localhost:8080` |
+| TLS_INSECURE | **Do not use in production!** Ignore SSL errors.  May help if you're using a proxy and requests are rejected due to certificate errors. Ex: `TLS_INSECURE=1` |
 
-    export SERVER_ACCESS_TOKEN=xxxx
+## Examples
 
-Run the weather example:
+The `examples` directory contain directories which demonstrate some of the intended uses of this library:
 
-    $ ./scripts/run.sh 01-weather -token=$SERVER_ACCESS_TOKEN
-    Running example 'examples/01-weather' with args '-token=...'
-    Interactive mode (use ':quit' to stop)
-    interactive> What is the weather?
-    < Where, exactly?
-    interactive> In Paris?
-    < I see it’s sunny in Paris today!
-    interactive> :quit
-
-This example mimics the functionality covered in the
-[wit.ai quick start tutorial](https://wit.ai/docs/quickstart).  You can view
-the source of the example [here](/examples/weather/main.go).
-
-For debug output including raw HTTP logs:
-
-    ./scripts/run.sh 01-weather -debug -token=$SERVER_ACCESS_TOKEN
+ * [Interactive example](./examples/01-weather/README.md)
+ * [Twitter example](./examples/02-twitter/README.md)
