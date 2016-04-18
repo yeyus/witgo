@@ -4,6 +4,8 @@ This example demonstrates writing a bot using Twitter as an input / output mecha
 
 See [main.go](./main.go) for source code.
 
+**NOTE:** The Twitter API only allows polling the DM timeline 15 times every 15 minutes.  This means response time to a DM is at least 1 minute, which is extremely slow for a bot.  TODO: Add a more sophisticated example using User Streams.
+
 ![screenshot of DM conversation](./convo.png)
 
 ## Running
