@@ -1,9 +1,15 @@
 # witgo
-WIP. Go client for wit.ai
+A Golang client for [wit.ai](https://wit.ai) - an API which allows developers to "easily create text or voice based bots that humans can chat with on their preferred messaging platform."  
+
+Intended to play nicely with [twittergo](https://github.com/kurrik/twittergo).
 
 ## Info
 
 - [v1 Docs](https://godoc.org/github.com/kurrik/witgo/v1/witgo)
+
+## Contributing
+
+Pull requests or github issues are welcome.  If you send a PR please add yourself to [CONTRIBUTORS](./CONTRIBUTORS) as well.
 
 ## Usage
 
