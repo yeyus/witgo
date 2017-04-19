@@ -121,16 +121,16 @@ func NewClient(accessToken string) *Client {
 			Proxy:              http.ProxyURL(proxy),
 			TLSClientConfig:    tlsconfig,
 			DisableCompression: true,
-			DisableKeepAlives: true,
+			DisableKeepAlives:  true,
 		}
 	} else {
 		transport = &http.Transport{}
 	}
 	return &Client{
 		ServerAccessToken: accessToken,
-		Version:           "20160412",
+		Version:           "20170418",
 		Base:              "https://api.wit.ai",
-		UserAgent:         "github.com/kurrik/witgo",
+		UserAgent:         "github.com/yeyus/witgo",
 		HttpClient: &http.Client{
 			Transport: transport,
 		},

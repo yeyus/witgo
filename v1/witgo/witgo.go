@@ -20,7 +20,7 @@ import (
 )
 
 type Handler interface {
-	Action(session *Session, action string) (response *Session, err error)
+	Action(session *Session, entities EntityMap, action string) (response *Session, err error)
 	Say(session *Session, msg string) (response *Session, err error)
 	Merge(session *Session, entities EntityMap) (response *Session, err error)
 	Error(session *Session, msg string)
@@ -53,7 +53,7 @@ func (w *Witgo) process(session *Session, q string) (out *Session, err error) {
 		}
 		switch strings.ToLower(converse.Type) {
 		case "action":
-			if session, err = w.handler.Action(session, converse.Action); err != nil {
+			if session, err = w.handler.Action(session, converse.Entities, converse.Action); err != nil {
 				return
 			}
 		case "msg":
